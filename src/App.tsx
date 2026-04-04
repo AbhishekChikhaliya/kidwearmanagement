@@ -3,24 +3,44 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { AppLayout } from "@/components/AppLayout";
+import Index from "./pages/Index";
+import Login from "./pages/Login";
+import ComingSoon from "./pages/ComingSoon";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<ProtectedRoute><AppLayout><Index /></AppLayout></ProtectedRoute>} />
+                <Route path="/products" element={<ProtectedRoute><AppLayout><ComingSoon page="Products" /></AppLayout></ProtectedRoute>} />
+                <Route path="/categories" element={<ProtectedRoute><AppLayout><ComingSoon page="Categories" /></AppLayout></ProtectedRoute>} />
+                <Route path="/orders" element={<ProtectedRoute><AppLayout><ComingSoon page="Orders" /></AppLayout></ProtectedRoute>} />
+                <Route path="/suppliers" element={<ProtectedRoute><AppLayout><ComingSoon page="Suppliers" /></AppLayout></ProtectedRoute>} />
+                <Route path="/sales" element={<ProtectedRoute><AppLayout><ComingSoon page="Sales" /></AppLayout></ProtectedRoute>} />
+                <Route path="/reports" element={<ProtectedRoute><AppLayout><ComingSoon page="Reports" /></AppLayout></ProtectedRoute>} />
+                <Route path="/settings" element={<ProtectedRoute><AppLayout><ComingSoon page="Settings" /></AppLayout></ProtectedRoute>} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

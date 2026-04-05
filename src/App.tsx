@@ -13,6 +13,9 @@ import Login from "./pages/Login";
 import Products from "./pages/Products";
 import Categories from "./pages/Categories";
 import Suppliers from "./pages/Suppliers";
+import Sales from "./pages/Sales";
+import Orders from "./pages/Orders";
+import Inventory from "./pages/Inventory";
 import ComingSoon from "./pages/ComingSoon";
 import NotFound from "./pages/NotFound";
 
@@ -33,8 +36,9 @@ const App = () => (
                 <Route path="/products" element={<ProtectedRoute><AppLayout><Products /></AppLayout></ProtectedRoute>} />
                 <Route path="/categories" element={<ProtectedRoute><AppLayout><Categories /></AppLayout></ProtectedRoute>} />
                 <Route path="/suppliers" element={<ProtectedRoute><AppLayout><Suppliers /></AppLayout></ProtectedRoute>} />
-                <Route path="/orders" element={<ProtectedRoute><AppLayout><ComingSoon page="Orders" /></AppLayout></ProtectedRoute>} />
-                <Route path="/sales" element={<ProtectedRoute><AppLayout><ComingSoon page="Sales" /></AppLayout></ProtectedRoute>} />
+                <Route path="/sales" element={<ProtectedRoute><AppLayout><Sales /></AppLayout></ProtectedRoute>} />
+                <Route path="/orders" element={<ProtectedRoute><AppLayout><Orders /></AppLayout></ProtectedRoute>} />
+                <Route path="/inventory" element={<ProtectedRoute><AppLayout><Inventory /></AppLayout></ProtectedRoute>} />
                 <Route path="/reports" element={<ProtectedRoute><AppLayout><ComingSoon page="Reports" /></AppLayout></ProtectedRoute>} />
                 <Route path="/settings" element={<ProtectedRoute><AppLayout><ComingSoon page="Settings" /></AppLayout></ProtectedRoute>} />
                 <Route path="*" element={<NotFound />} />

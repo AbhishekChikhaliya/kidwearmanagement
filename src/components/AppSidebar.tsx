@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, Package, ShoppingCart, Users, TrendingUp,
-  FileText, Settings, Tags,
+  FileText, Settings, Tags, Warehouse,
 } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useLocation } from 'react-router-dom';

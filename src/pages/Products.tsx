@@ -142,7 +142,10 @@ export default function Products() {
             <TableBody>
               {filtered.map(p => (
                 <TableRow key={p.id}>
-                  <TableCell className="font-medium">{p.name}{p.size && <span className="text-muted-foreground text-xs ml-1">({p.size})</span>}</TableCell>
+                  <TableCell className="font-medium">
+                    {p.name}{p.size && <span className="text-muted-foreground text-xs ml-1">({p.size})</span>}
+                    {p.barcode && <p className="text-xs font-mono text-muted-foreground">{p.barcode}</p>}
+                  </TableCell>
                   <TableCell className="hidden md:table-cell">{language === 'gu' ? (p.categories?.name_gu || p.categories?.name) : p.categories?.name || '-'}</TableCell>
                   <TableCell className="hidden md:table-cell">{p.brand || '-'}</TableCell>
                   <TableCell>

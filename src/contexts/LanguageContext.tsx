@@ -86,6 +86,20 @@ const translations = {
     dangerZone: 'Danger Zone', logoutDesc: 'Sign out of your account on this device.',
     // Barcode
     generateBarcode: 'Generate Barcode', barcodeGenerated: 'Barcode generated',
+    // Bill Upload
+    billUpload: 'Bill Upload', uploadBillImage: 'Please upload a bill image',
+    uploadingBill: 'Uploading bill...', extractingDetails: 'AI is extracting details...',
+    dropOrClickBill: 'Click or drop supplier bill image here',
+    supportedFormats: 'Supports JPG, PNG images',
+    billExtracted: 'Bill details extracted successfully',
+    extractionFailed: 'Failed to extract bill details',
+    billPreview: 'Bill Preview', extractedDetails: 'Extracted Details',
+    billNo: 'Bill No', existingSupplier: 'Existing Supplier', newSupplier: 'New Supplier',
+    items: 'Items', confirmAndAddStock: 'Confirm & Add to Stock',
+    billSaved: 'Bill processed — products & stock updated!', saveFailed: 'Failed to save',
+    // Invoice
+    invoice: 'Invoice', printInvoice: 'Print Invoice', thankYou: 'Thank you for your purchase!',
+    customerName: 'Customer Name', customerPhone: 'Customer Phone',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ', products: 'પ્રોડક્ટ્સ', orders: 'ઓર્ડર્સ', suppliers: 'સપ્લાયર્સ',
@@ -160,6 +174,20 @@ const translations = {
     passwordsDoNotMatch: 'પાસવર્ડ મેળ ખાતા નથી', passwordTooShort: 'પાસવર્ડ ઓછામાં ઓછા ૬ અક્ષરનો હોવો જોઈએ',
     dangerZone: 'ડેન્જર ઝોન', logoutDesc: 'આ ઉપકરણ પરથી તમારા એકાઉન્ટમાંથી સાઇન આઉટ કરો.',
     generateBarcode: 'બારકોડ જનરેટ કરો', barcodeGenerated: 'બારકોડ જનરેટ થયો',
+    // Bill Upload
+    billUpload: 'બિલ અપલોડ', uploadBillImage: 'કૃપા કરી બિલની છબી અપલોડ કરો',
+    uploadingBill: 'બિલ અપલોડ થઈ રહ્યું છે...', extractingDetails: 'AI વિગતો કાઢી રહ્યું છે...',
+    dropOrClickBill: 'સપ્લાયર બિલની છબી અહીં ક્લિક કરો અથવા મૂકો',
+    supportedFormats: 'JPG, PNG ફોર્મેટ સપોર્ટેડ છે',
+    billExtracted: 'બિલની વિગતો સફળતાપૂર્વક કાઢવામાં આવી',
+    extractionFailed: 'બિલની વિગતો કાઢવામાં નિષ્ફળ',
+    billPreview: 'બિલ પ્રીવ્યૂ', extractedDetails: 'કાઢવામાં આવેલી વિગતો',
+    billNo: 'બિલ નંબર', existingSupplier: 'હાલનો સપ્લાયર', newSupplier: 'નવો સપ્લાયર',
+    items: 'આઇટમ્સ', confirmAndAddStock: 'પુષ્ટિ કરો અને સ્ટોકમાં ઉમેરો',
+    billSaved: 'બિલ પ્રોસેસ થયું — પ્રોડક્ટ્સ અને સ્ટોક અપડેટ થયા!', saveFailed: 'સેવ નિષ્ફળ',
+    // Invoice
+    invoice: 'ઇન્વોઇસ', printInvoice: 'ઇન્વોઇસ પ્રિન્ટ કરો', thankYou: 'તમારી ખરીદી માટે આભાર!',
+    customerName: 'ગ્રાહકનું નામ', customerPhone: 'ગ્રાહકનો ફોન',
   },
 } as const;
 

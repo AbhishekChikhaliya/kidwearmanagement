@@ -16,7 +16,8 @@ import Suppliers from "./pages/Suppliers";
 import Sales from "./pages/Sales";
 import Orders from "./pages/Orders";
 import Inventory from "./pages/Inventory";
-import ComingSoon from "./pages/ComingSoon";
+import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

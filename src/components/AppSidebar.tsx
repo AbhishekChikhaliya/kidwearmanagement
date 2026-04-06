@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, Package, ShoppingCart, Users, TrendingUp,
-  FileText, Settings, Tags, Warehouse,
+  FileText, Settings, Tags, Warehouse, Receipt,
 } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useLocation } from 'react-router-dom';
@@ -25,6 +25,7 @@ export function AppSidebar() {
     { title: t('suppliers'), url: '/suppliers', icon: Users },
     { title: t('sales'), url: '/sales', icon: TrendingUp },
     { title: t('inventory'), url: '/inventory', icon: Warehouse },
+    { title: t('billUpload'), url: '/bill-upload', icon: Receipt },
     { title: t('reports'), url: '/reports', icon: FileText },
     { title: t('settings'), url: '/settings', icon: Settings },
   ];

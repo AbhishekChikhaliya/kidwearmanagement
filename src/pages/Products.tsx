@@ -142,7 +142,10 @@ export default function Products() {
             <TableBody>
               {filtered.map(p => (
                 <TableRow key={p.id}>
-                  <TableCell className="font-medium">{p.name}{p.size && <span className="text-muted-foreground text-xs ml-1">({p.size})</span>}</TableCell>
+                  <TableCell className="font-medium">
+                    {p.name}{p.size && <span className="text-muted-foreground text-xs ml-1">({p.size})</span>}
+                    {p.barcode && <p className="text-xs font-mono text-muted-foreground">{p.barcode}</p>}
+                  </TableCell>
                   <TableCell className="hidden md:table-cell">{language === 'gu' ? (p.categories?.name_gu || p.categories?.name) : p.categories?.name || '-'}</TableCell>
                   <TableCell className="hidden md:table-cell">{p.brand || '-'}</TableCell>
                   <TableCell>
@@ -189,7 +192,22 @@ export default function Products() {
               <div><Label>{t('color')}</Label><Input value={form.color} onChange={e => setForm({...form, color: e.target.value})} /></div>
               <div><Label>{t('brand')}</Label><Input value={form.brand} onChange={e => setForm({...form, brand: e.target.value})} /></div>
             </div>
-            <div><Label>{t('barcode')}</Label><Input value={form.barcode} onChange={e => setForm({...form, barcode: e.target.value})} /></div>
+            <div>
+              <Label>{t('barcode')}</Label>
+              <div className="flex gap-2">
+                <Input value={form.barcode} onChange={e => setForm({...form, barcode: e.target.value})} className="flex-1" />
+                <Button type="button" variant="outline" size="sm" onClick={() => {
+                  const code = 'KW' + Date.now().toString().slice(-10);
+                  setForm({...form, barcode: code});
+                  toast.success(t('barcodeGenerated'));
+                }}>{t('generateBarcode')}</Button>
+              </div>
+              {form.barcode && (
+                <div className="mt-2 p-2 bg-muted rounded text-center font-mono text-lg tracking-widest text-foreground">
+                  {form.barcode}
+                </div>
+              )}
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <div><Label>{t('wholesalePrice')}</Label><Input type="number" value={form.wholesale_price} onChange={e => setForm({...form, wholesale_price: +e.target.value})} /></div>
               <div><Label>{t('retailPrice')}</Label><Input type="number" value={form.retail_price} onChange={e => setForm({...form, retail_price: +e.target.value})} /></div>

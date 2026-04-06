@@ -16,6 +16,7 @@ import Suppliers from "./pages/Suppliers";
 import Sales from "./pages/Sales";
 import Orders from "./pages/Orders";
 import Inventory from "./pages/Inventory";
+import BillUpload from "./pages/BillUpload";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
@@ -40,6 +41,7 @@ const App = () => (
                 <Route path="/sales" element={<ProtectedRoute><AppLayout><Sales /></AppLayout></ProtectedRoute>} />
                 <Route path="/orders" element={<ProtectedRoute><AppLayout><Orders /></AppLayout></ProtectedRoute>} />
                 <Route path="/inventory" element={<ProtectedRoute><AppLayout><Inventory /></AppLayout></ProtectedRoute>} />
+                <Route path="/bill-upload" element={<ProtectedRoute><AppLayout><BillUpload /></AppLayout></ProtectedRoute>} />
                 <Route path="/reports" element={<ProtectedRoute><AppLayout><Reports /></AppLayout></ProtectedRoute>} />
                 <Route path="/settings" element={<ProtectedRoute><AppLayout><Settings /></AppLayout></ProtectedRoute>} />
                 <Route path="*" element={<NotFound />} />

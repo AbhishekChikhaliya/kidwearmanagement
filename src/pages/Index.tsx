@@ -76,7 +76,7 @@ export default function Dashboard() {
       setData({
         totalProducts: productsRes.count || 0,
         totalCategories: categoriesRes.count || 0,
-        lowStockItems: (lowStockRes.data as any[]) || [],
+        lowStockItems: ((lowStockRes.data as any[]) || []).filter((p: any) => p.stock_quantity <= p.min_stock_level),
         todaysSales: todayTotal,
         stockByCategory: Object.entries(catMap).map(([name, value]) => ({ name, value })),
         salesTrend: Object.entries(trendMap).map(([date, sales]) => ({

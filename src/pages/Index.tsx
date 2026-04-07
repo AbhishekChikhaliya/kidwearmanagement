@@ -42,7 +42,7 @@ export default function Dashboard() {
       const [productsRes, categoriesRes, lowStockRes, salesTodayRes, salesTrendRes, ordersRes] = await Promise.all([
         supabase.from('products').select('id', { count: 'exact', head: true }),
         supabase.from('categories').select('id', { count: 'exact', head: true }),
-        supabase.from('products').select('id, name, stock_quantity, min_stock_level').filter('stock_quantity', 'lte', 'min_stock_level' as unknown as number),
+        supabase.from('products').select('id, name, stock_quantity, min_stock_level'),
         supabase.from('sales').select('quantity').eq('sale_date', today),
         supabase.from('sales').select('sale_date, quantity').gte('sale_date', sevenDaysAgo).order('sale_date'),
         supabase.from('purchase_orders').select('id, quantity, status, order_date, products(name), suppliers(name)').order('created_at', { ascending: false }).limit(5),
@@ -76,7 +76,7 @@ export default function Dashboard() {
       setData({
         totalProducts: productsRes.count || 0,
         totalCategories: categoriesRes.count || 0,
-        lowStockItems: (lowStockRes.data as any[]) || [],
+        lowStockItems: ((lowStockRes.data as any[]) || []).filter((p: any) => p.stock_quantity <= p.min_stock_level),
         todaysSales: todayTotal,
         stockByCategory: Object.entries(catMap).map(([name, value]) => ({ name, value })),
         salesTrend: Object.entries(trendMap).map(([date, sales]) => ({

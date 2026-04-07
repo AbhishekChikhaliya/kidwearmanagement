@@ -13,9 +13,11 @@ import Login from "./pages/Login";
 import Products from "./pages/Products";
 import Categories from "./pages/Categories";
 import Suppliers from "./pages/Suppliers";
+import Customers from "./pages/Customers";
 import Sales from "./pages/Sales";
 import Orders from "./pages/Orders";
 import Inventory from "./pages/Inventory";
+import Expenses from "./pages/Expenses";
 import BillUpload from "./pages/BillUpload";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
@@ -40,9 +42,11 @@ const App = () => (
                 <Route path="/products" element={<ProtectedRoute><AppLayout><Products /></AppLayout></ProtectedRoute>} />
                 <Route path="/categories" element={<ProtectedRoute><AppLayout><Categories /></AppLayout></ProtectedRoute>} />
                 <Route path="/suppliers" element={<ProtectedRoute><AppLayout><Suppliers /></AppLayout></ProtectedRoute>} />
+                <Route path="/customers" element={<ProtectedRoute><AppLayout><Customers /></AppLayout></ProtectedRoute>} />
                 <Route path="/sales" element={<ProtectedRoute><AppLayout><Sales /></AppLayout></ProtectedRoute>} />
                 <Route path="/orders" element={<ProtectedRoute><AppLayout><Orders /></AppLayout></ProtectedRoute>} />
                 <Route path="/inventory" element={<ProtectedRoute><AppLayout><Inventory /></AppLayout></ProtectedRoute>} />
+                <Route path="/expenses" element={<ProtectedRoute><AppLayout><Expenses /></AppLayout></ProtectedRoute>} />
                 <Route path="/bill-upload" element={<ProtectedRoute><AppLayout><BillUpload /></AppLayout></ProtectedRoute>} />
                 <Route path="/reports" element={<ProtectedRoute><AppLayout><Reports /></AppLayout></ProtectedRoute>} />
                 <Route path="/settings" element={<ProtectedRoute><AppLayout><Settings /></AppLayout></ProtectedRoute>} />

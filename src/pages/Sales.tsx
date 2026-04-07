@@ -18,10 +18,16 @@ interface Sale {
   product_id: string;
   quantity: number;
   sale_date: string;
+  discount: number;
+  payment_mode: string;
+  invoice_no: string | null;
+  customer_id: string | null;
   products?: { name: string; retail_price: number } | null;
+  customers?: { name: string } | null;
 }
 
 interface Product { id: string; name: string; stock_quantity: number; retail_price: number; }
+interface Customer { id: string; name: string; phone: string | null; }
 
 interface CartItem {
   product_id: string;
@@ -35,22 +41,27 @@ export default function Sales() {
   const { t } = useLanguage();
   const [sales, setSales] = useState<Sale[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
+  const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [addProductId, setAddProductId] = useState('');
   const [addQty, setAddQty] = useState(1);
-  // Invoice
+  const [discount, setDiscount] = useState(0);
+  const [paymentMode, setPaymentMode] = useState('cash');
+  const [customerId, setCustomerId] = useState('');
   const [invoiceOpen, setInvoiceOpen] = useState(false);
-  const [invoiceData, setInvoiceData] = useState<{ items: { name: string; quantity: number; price: number }[]; invoiceNo: string; date: string } | null>(null);
+  const [invoiceData, setInvoiceData] = useState<{ items: { name: string; quantity: number; price: number }[]; invoiceNo: string; date: string; discount?: number; customerName?: string; paymentMode?: string } | null>(null);
 
   const fetchData = async () => {
-    const [s, p] = await Promise.all([
-      supabase.from('sales').select('*, products(name, retail_price)').order('sale_date', { ascending: false }).limit(100),
+    const [s, p, c] = await Promise.all([
+      supabase.from('sales').select('*, products(name, retail_price), customers(name)').order('sale_date', { ascending: false }).limit(100),
       supabase.from('products').select('id, name, stock_quantity, retail_price').order('name'),
+      supabase.from('customers').select('id, name, phone').order('name'),
     ]);
     setSales((s.data as Sale[]) || []);
     setProducts(p.data || []);
+    setCustomers(c.data || []);
     setLoading(false);
   };
 
@@ -62,7 +73,6 @@ export default function Sales() {
     if (!product) return;
     if (addQty < 1) { toast.error(t('invalidQuantity')); return; }
     if (addQty > product.stock_quantity) { toast.error(t('insufficientStock')); return; }
-
     const existing = cart.find(c => c.product_id === addProductId);
     if (existing) {
       setCart(cart.map(c => c.product_id === addProductId ? { ...c, quantity: c.quantity + addQty } : c));
@@ -73,26 +83,28 @@ export default function Sales() {
     setAddQty(1);
   };
 
-  const removeFromCart = (productId: string) => {
-    setCart(cart.filter(c => c.product_id !== productId));
-  };
+  const removeFromCart = (productId: string) => setCart(cart.filter(c => c.product_id !== productId));
+
+  const cartSubtotal = cart.reduce((sum, c) => sum + c.price * c.quantity, 0);
+  const cartTotal = Math.max(0, cartSubtotal - discount);
 
   const handleCompleteSale = async () => {
     if (cart.length === 0) { toast.error(t('selectProduct')); return; }
-
     const saleDate = new Date().toISOString().split('T')[0];
     const invoiceNo = `INV-${Date.now().toString(36).toUpperCase()}`;
 
     for (const item of cart) {
-      // Insert sale
       const { error: saleErr } = await supabase.from('sales').insert({
         product_id: item.product_id,
         quantity: item.quantity,
         sale_date: saleDate,
+        discount: discount / cart.length,
+        payment_mode: paymentMode,
+        invoice_no: invoiceNo,
+        customer_id: customerId || null,
       });
       if (saleErr) { toast.error(saleErr.message); return; }
 
-      // Reduce stock
       const product = products.find(p => p.id === item.product_id);
       if (product) {
         await supabase.from('products').update({
@@ -100,7 +112,6 @@ export default function Sales() {
         }).eq('id', item.product_id);
       }
 
-      // Log inventory
       await supabase.from('inventory_logs').insert({
         product_id: item.product_id,
         type: 'sold' as const,
@@ -109,16 +120,22 @@ export default function Sales() {
       });
     }
 
-    // Show invoice
+    const selectedCustomer = customers.find(c => c.id === customerId);
     setInvoiceData({
       items: cart.map(c => ({ name: c.name, quantity: c.quantity, price: c.price })),
       invoiceNo,
       date: new Date().toLocaleDateString(),
+      discount,
+      customerName: selectedCustomer?.name,
+      paymentMode,
     });
 
     toast.success(t('saleRecorded'));
     setDialogOpen(false);
     setCart([]);
+    setDiscount(0);
+    setPaymentMode('cash');
+    setCustomerId('');
     setInvoiceOpen(true);
     fetchData();
   };
@@ -137,8 +154,6 @@ export default function Sales() {
     fetchData();
   };
 
-  const cartTotal = cart.reduce((sum, c) => sum + c.price * c.quantity, 0);
-
   if (loading) return <div className="flex items-center justify-center h-64"><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" /></div>;
 
   return (
@@ -155,8 +170,10 @@ export default function Sales() {
               <TableRow>
                 <TableHead>{t('date')}</TableHead>
                 <TableHead>{t('product')}</TableHead>
+                <TableHead className="hidden md:table-cell">{t('customer')}</TableHead>
                 <TableHead>{t('quantity')}</TableHead>
                 <TableHead>{t('amount')}</TableHead>
+                <TableHead className="hidden md:table-cell">{t('paymentMode')}</TableHead>
                 <TableHead className="text-right">{t('actions')}</TableHead>
               </TableRow>
             </TableHeader>
@@ -165,27 +182,43 @@ export default function Sales() {
                 <TableRow key={s.id}>
                   <TableCell>{new Date(s.sale_date).toLocaleDateString()}</TableCell>
                   <TableCell className="font-medium">{s.products?.name || '-'}</TableCell>
+                  <TableCell className="hidden md:table-cell">{s.customers?.name || '-'}</TableCell>
                   <TableCell><Badge variant="secondary">{s.quantity} {t('pieces')}</Badge></TableCell>
-                  <TableCell>₹{((s.products?.retail_price || 0) * s.quantity).toLocaleString()}</TableCell>
+                  <TableCell>₹{((s.products?.retail_price || 0) * s.quantity - (s.discount || 0)).toLocaleString()}</TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    <Badge variant="outline">{t(s.payment_mode as any) || s.payment_mode}</Badge>
+                  </TableCell>
                   <TableCell className="text-right">
                     <Button variant="ghost" size="icon" onClick={() => handleDelete(s)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
                   </TableCell>
                 </TableRow>
               ))}
               {sales.length === 0 && (
-                <TableRow><TableCell colSpan={5} className="text-center text-muted-foreground py-8">{t('noSales')}</TableCell></TableRow>
+                <TableRow><TableCell colSpan={7} className="text-center text-muted-foreground py-8">{t('noSales')}</TableCell></TableRow>
               )}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
 
-      {/* Multi-item Sale Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader><DialogTitle>{t('recordSale')}</DialogTitle></DialogHeader>
           <div className="grid gap-4 py-2">
-            {/* Add product to cart */}
+            {/* Customer selection */}
+            <div>
+              <Label>{t('customer')}</Label>
+              <Select value={customerId} onValueChange={setCustomerId}>
+                <SelectTrigger><SelectValue placeholder={t('selectCustomer')} /></SelectTrigger>
+                <SelectContent>
+                  {customers.map(c => (
+                    <SelectItem key={c.id} value={c.id}>{c.name}{c.phone ? ` (${c.phone})` : ''}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Add product */}
             <div className="flex gap-2 items-end">
               <div className="flex-1">
                 <Label>{t('product')}</Label>
@@ -193,9 +226,7 @@ export default function Sales() {
                   <SelectTrigger><SelectValue placeholder={t('selectProduct')} /></SelectTrigger>
                   <SelectContent>
                     {products.filter(p => p.stock_quantity > 0).map(p => (
-                      <SelectItem key={p.id} value={p.id}>
-                        {p.name} ({t('stock')}: {p.stock_quantity})
-                      </SelectItem>
+                      <SelectItem key={p.id} value={p.id}>{p.name} ({t('stock')}: {p.stock_quantity})</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -207,7 +238,7 @@ export default function Sales() {
               <Button onClick={addToCart} size="sm">{t('add')}</Button>
             </div>
 
-            {/* Cart items */}
+            {/* Cart */}
             {cart.length > 0 && (
               <div className="border rounded-lg overflow-hidden">
                 <Table>
@@ -238,9 +269,41 @@ export default function Sales() {
             )}
 
             {cart.length > 0 && (
-              <div className="p-3 rounded-lg bg-muted text-right">
-                <span className="text-muted-foreground">{t('amount')}: </span>
-                <span className="font-bold text-lg text-foreground">₹{cartTotal.toLocaleString()}</span>
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label>{t('discount')} (₹)</Label>
+                    <Input type="number" min={0} value={discount} onChange={e => setDiscount(+e.target.value)} />
+                  </div>
+                  <div>
+                    <Label>{t('paymentMode')}</Label>
+                    <Select value={paymentMode} onValueChange={setPaymentMode}>
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="cash">{t('cash')}</SelectItem>
+                        <SelectItem value="upi">{t('upi')}</SelectItem>
+                        <SelectItem value="card">{t('card')}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-lg bg-muted space-y-1">
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>{t('subtotal')}</span>
+                    <span>₹{cartSubtotal.toLocaleString()}</span>
+                  </div>
+                  {discount > 0 && (
+                    <div className="flex justify-between text-sm text-destructive">
+                      <span>{t('discount')}</span>
+                      <span>-₹{discount.toLocaleString()}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between font-bold text-lg text-foreground border-t pt-1">
+                    <span>{t('total')}</span>
+                    <span>₹{cartTotal.toLocaleString()}</span>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -251,7 +314,6 @@ export default function Sales() {
         </DialogContent>
       </Dialog>
 
-      {/* Invoice Dialog */}
       {invoiceData && (
         <SaleInvoice
           open={invoiceOpen}
@@ -259,6 +321,9 @@ export default function Sales() {
           items={invoiceData.items}
           invoiceNo={invoiceData.invoiceNo}
           date={invoiceData.date}
+          discount={invoiceData.discount}
+          customerName={invoiceData.customerName}
+          paymentMode={invoiceData.paymentMode}
         />
       )}
     </div>

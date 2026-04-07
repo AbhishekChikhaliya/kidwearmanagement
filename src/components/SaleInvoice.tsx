@@ -17,13 +17,17 @@ interface SaleInvoiceProps {
   invoiceNo: string;
   date: string;
   shopName?: string;
+  discount?: number;
+  customerName?: string;
+  paymentMode?: string;
 }
 
-export function SaleInvoice({ open, onOpenChange, items, invoiceNo, date, shopName }: SaleInvoiceProps) {
+export function SaleInvoice({ open, onOpenChange, items, invoiceNo, date, shopName, discount = 0, customerName, paymentMode }: SaleInvoiceProps) {
   const { t } = useLanguage();
   const printRef = useRef<HTMLDivElement>(null);
 
-  const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const total = Math.max(0, subtotal - discount);
 
   const handlePrint = () => {
     const content = printRef.current;
@@ -61,6 +65,8 @@ export function SaleInvoice({ open, onOpenChange, items, invoiceNo, date, shopNa
             <h2 className="text-lg font-bold">{shopName || 'KidWear Store'}</h2>
             <p className="text-xs text-muted-foreground">{t('invoice')} #{invoiceNo}</p>
             <p className="text-xs text-muted-foreground">{t('date')}: {date}</p>
+            {customerName && <p className="text-xs text-muted-foreground">{t('customer')}: {customerName}</p>}
+            {paymentMode && <p className="text-xs text-muted-foreground">{t('paymentMode')}: {t(paymentMode as any)}</p>}
           </div>
 
           <table className="w-full text-sm">
@@ -82,9 +88,21 @@ export function SaleInvoice({ open, onOpenChange, items, invoiceNo, date, shopNa
             </tbody>
           </table>
 
-          <div className="text-right mt-3 pt-2 border-t-2 border-foreground">
-            <span className="text-muted-foreground">{t('amount')}: </span>
-            <span className="text-xl font-bold">₹{total.toLocaleString()}</span>
+          <div className="mt-3 pt-2 border-t-2 border-foreground space-y-1">
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">{t('subtotal')}:</span>
+              <span>₹{subtotal.toLocaleString()}</span>
+            </div>
+            {discount > 0 && (
+              <div className="flex justify-between text-sm text-destructive">
+                <span>{t('discount')}:</span>
+                <span>-₹{discount.toLocaleString()}</span>
+              </div>
+            )}
+            <div className="flex justify-between text-lg font-bold">
+              <span>{t('total')}:</span>
+              <span>₹{total.toLocaleString()}</span>
+            </div>
           </div>
 
           <div className="text-center mt-4 text-xs text-muted-foreground border-t border-dashed pt-2">

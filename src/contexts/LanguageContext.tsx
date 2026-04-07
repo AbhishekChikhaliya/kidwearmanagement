@@ -100,6 +100,13 @@ const translations = {
     // Invoice
     invoice: 'Invoice', printInvoice: 'Print Invoice', thankYou: 'Thank you for your purchase!',
     customerName: 'Customer Name', customerPhone: 'Customer Phone',
+    // Forgot/Reset Password
+    forgotPassword: 'Forgot Password?', forgotPasswordDesc: 'Enter your email to receive a password reset link.',
+    sendResetLink: 'Send Reset Link', sendingResetLink: 'Sending...',
+    resetEmailSent: 'Password reset link sent! Check your email.',
+    checkEmailConfirm: 'Check your email to confirm your account.',
+    resetPassword: 'Reset Password', enterNewPassword: 'Enter your new password below.',
+    backToLogin: 'Back to Login', invalidResetLink: 'This reset link is invalid or has expired.',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ', products: 'પ્રોડક્ટ્સ', orders: 'ઓર્ડર્સ', suppliers: 'સપ્લાયર્સ',
@@ -188,6 +195,13 @@ const translations = {
     // Invoice
     invoice: 'ઇન્વોઇસ', printInvoice: 'ઇન્વોઇસ પ્રિન્ટ કરો', thankYou: 'તમારી ખરીદી માટે આભાર!',
     customerName: 'ગ્રાહકનું નામ', customerPhone: 'ગ્રાહકનો ફોન',
+    // Forgot/Reset Password
+    forgotPassword: 'પાસવર્ડ ભૂલી ગયા?', forgotPasswordDesc: 'પાસવર્ડ રીસેટ લિંક મેળવવા માટે તમારો ઇમેઇલ દાખલ કરો.',
+    sendResetLink: 'રીસેટ લિંક મોકલો', sendingResetLink: 'મોકલી રહ્યા છીએ...',
+    resetEmailSent: 'પાસવર્ડ રીસેટ લિંક મોકલવામાં આવી! તમારો ઇમેઇલ ચેક કરો.',
+    checkEmailConfirm: 'તમારો એકાઉન્ટ કન્ફર્મ કરવા ઇમેઇલ ચેક કરો.',
+    resetPassword: 'પાસવર્ડ રીસેટ કરો', enterNewPassword: 'નીચે તમારો નવો પાસવર્ડ દાખલ કરો.',
+    backToLogin: 'લોગિન પર પાછા જાઓ', invalidResetLink: 'આ રીસેટ લિંક અમાન્ય અથવા સમયસીમા વીતી ગઈ છે.',
   },
 } as const;
 

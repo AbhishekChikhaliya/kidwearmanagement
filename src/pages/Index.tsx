@@ -42,7 +42,7 @@ export default function Dashboard() {
       const [productsRes, categoriesRes, lowStockRes, salesTodayRes, salesTrendRes, ordersRes] = await Promise.all([
         supabase.from('products').select('id', { count: 'exact', head: true }),
         supabase.from('categories').select('id', { count: 'exact', head: true }),
-        supabase.from('products').select('id, name, stock_quantity, min_stock_level').filter('stock_quantity', 'lte', 'min_stock_level' as unknown as number),
+        supabase.rpc('get_low_stock_products').then(res => res as any) || supabase.from('products').select('id, name, stock_quantity, min_stock_level'),
         supabase.from('sales').select('quantity').eq('sale_date', today),
         supabase.from('sales').select('sale_date, quantity').gte('sale_date', sevenDaysAgo).order('sale_date'),
         supabase.from('purchase_orders').select('id, quantity, status, order_date, products(name), suppliers(name)').order('created_at', { ascending: false }).limit(5),

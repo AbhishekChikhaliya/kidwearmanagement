@@ -107,6 +107,27 @@ const translations = {
     checkEmailConfirm: 'Check your email to confirm your account.',
     resetPassword: 'Reset Password', enterNewPassword: 'Enter your new password below.',
     backToLogin: 'Back to Login', invalidResetLink: 'This reset link is invalid or has expired.',
+    // Customers
+    customers: 'Customers', addCustomer: 'Add Customer', editCustomer: 'Edit Customer',
+    searchCustomers: 'Search customers...', noCustomers: 'No customers found',
+    customerAdded: 'Customer added successfully', customerUpdated: 'Customer updated successfully',
+    customerDeleted: 'Customer deleted successfully',
+    // Expenses
+    expenses: 'Expenses', addExpense: 'Add Expense', totalExpenses: 'Total Expenses',
+    expenseAdded: 'Expense added', expenseDeleted: 'Expense deleted',
+    noExpenses: 'No expenses found', invalidAmount: 'Please enter a valid amount',
+    description: 'Description',
+    // Expense categories
+    rent: 'Rent', salary: 'Salary', utilities: 'Utilities', transport: 'Transport',
+    packaging: 'Packaging', marketing: 'Marketing', maintenance: 'Maintenance', other: 'Other',
+    // Enhanced Sales
+    discount: 'Discount', paymentMode: 'Payment Mode', cash: 'Cash', upi: 'UPI', card: 'Card',
+    customer: 'Customer', selectCustomer: 'Select Customer (Optional)',
+    subtotal: 'Subtotal', total: 'Total',
+    // Dashboard
+    totalStockValue: 'Stock Value', monthlyRevenue: 'Monthly Revenue',
+    monthlyExpenses: 'Monthly Expenses', netProfit: 'Net Profit',
+    topSellingProducts: 'Top Selling Products', profitLoss: 'Profit & Loss',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ', products: 'પ્રોડક્ટ્સ', orders: 'ઓર્ડર્સ', suppliers: 'સપ્લાયર્સ',
@@ -202,6 +223,27 @@ const translations = {
     checkEmailConfirm: 'તમારો એકાઉન્ટ કન્ફર્મ કરવા ઇમેઇલ ચેક કરો.',
     resetPassword: 'પાસવર્ડ રીસેટ કરો', enterNewPassword: 'નીચે તમારો નવો પાસવર્ડ દાખલ કરો.',
     backToLogin: 'લોગિન પર પાછા જાઓ', invalidResetLink: 'આ રીસેટ લિંક અમાન્ય અથવા સમયસીમા વીતી ગઈ છે.',
+    // Customers
+    customers: 'ગ્રાહકો', addCustomer: 'ગ્રાહક ઉમેરો', editCustomer: 'ગ્રાહક સંપાદિત કરો',
+    searchCustomers: 'ગ્રાહકો શોધો...', noCustomers: 'કોઈ ગ્રાહક મળ્યા નથી',
+    customerAdded: 'ગ્રાહક સફળતાપૂર્વક ઉમેરાયા', customerUpdated: 'ગ્રાહક સફળતાપૂર્વક અપડેટ થયા',
+    customerDeleted: 'ગ્રાહક સફળતાપૂર્વક ડિલીટ થયા',
+    // Expenses
+    expenses: 'ખર્ચ', addExpense: 'ખર્ચ ઉમેરો', totalExpenses: 'કુલ ખર્ચ',
+    expenseAdded: 'ખર્ચ ઉમેરાયો', expenseDeleted: 'ખર્ચ ડિલીટ થયો',
+    noExpenses: 'કોઈ ખર્ચ મળ્યો નથી', invalidAmount: 'કૃપા કરી માન્ય રકમ દાખલ કરો',
+    description: 'વર્ણન',
+    // Expense categories
+    rent: 'ભાડું', salary: 'પગાર', utilities: 'ઉપયોગિતાઓ', transport: 'પરિવહન',
+    packaging: 'પેકેજિંગ', marketing: 'માર્કેટિંગ', maintenance: 'જાળવણી', other: 'અન્ય',
+    // Enhanced Sales
+    discount: 'ડિસ્કાઉન્ટ', paymentMode: 'ચુકવણી પદ્ધતિ', cash: 'રોકડ', upi: 'UPI', card: 'કાર્ડ',
+    customer: 'ગ્રાહક', selectCustomer: 'ગ્રાહક પસંદ કરો (વૈકલ્પિક)',
+    subtotal: 'પેટા કુલ', total: 'કુલ',
+    // Dashboard
+    totalStockValue: 'સ્ટોક મૂલ્ય', monthlyRevenue: 'માસિક આવક',
+    monthlyExpenses: 'માસિક ખર્ચ', netProfit: 'ચોખ્ખો નફો',
+    topSellingProducts: 'સૌથી વધુ વેચાતા પ્રોડક્ટ્સ', profitLoss: 'નફો અને નુકસાન',
   },
 } as const;
 

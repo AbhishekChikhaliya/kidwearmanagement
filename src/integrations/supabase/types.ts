@@ -38,6 +38,63 @@ export type Database = {
         }
         Relationships: []
       }
+      customers: {
+        Row: {
+          address: string | null
+          created_at: string
+          email: string | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string | null
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+        }
+        Relationships: []
+      }
+      expenses: {
+        Row: {
+          amount: number
+          category: Database["public"]["Enums"]["expense_category"]
+          created_at: string
+          description: string | null
+          expense_date: string
+          id: string
+        }
+        Insert: {
+          amount?: number
+          category?: Database["public"]["Enums"]["expense_category"]
+          created_at?: string
+          description?: string | null
+          expense_date?: string
+          id?: string
+        }
+        Update: {
+          amount?: number
+          category?: Database["public"]["Enums"]["expense_category"]
+          created_at?: string
+          description?: string | null
+          expense_date?: string
+          id?: string
+        }
+        Relationships: []
+      }
       inventory_logs: {
         Row: {
           created_at: string
@@ -190,26 +247,45 @@ export type Database = {
       sales: {
         Row: {
           created_at: string
+          customer_id: string | null
+          discount: number
           id: string
+          invoice_no: string | null
+          payment_mode: string
           product_id: string
           quantity: number
           sale_date: string
         }
         Insert: {
           created_at?: string
+          customer_id?: string | null
+          discount?: number
           id?: string
+          invoice_no?: string | null
+          payment_mode?: string
           product_id: string
           quantity: number
           sale_date?: string
         }
         Update: {
           created_at?: string
+          customer_id?: string | null
+          discount?: number
           id?: string
+          invoice_no?: string | null
+          payment_mode?: string
           product_id?: string
           quantity?: number
           sale_date?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "sales_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "sales_product_id_fkey"
             columns: ["product_id"]
@@ -254,6 +330,15 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      expense_category:
+        | "rent"
+        | "salary"
+        | "utilities"
+        | "transport"
+        | "packaging"
+        | "marketing"
+        | "maintenance"
+        | "other"
       inventory_log_type: "added" | "sold" | "adjusted"
       purchase_order_status: "ordered" | "received" | "pending"
     }
@@ -383,6 +468,16 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      expense_category: [
+        "rent",
+        "salary",
+        "utilities",
+        "transport",
+        "packaging",
+        "marketing",
+        "maintenance",
+        "other",
+      ],
       inventory_log_type: ["added", "sold", "adjusted"],
       purchase_order_status: ["ordered", "received", "pending"],
     },

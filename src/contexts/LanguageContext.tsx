@@ -128,6 +128,21 @@ const translations = {
     totalStockValue: 'Stock Value', monthlyRevenue: 'Monthly Revenue',
     monthlyExpenses: 'Monthly Expenses', netProfit: 'Net Profit',
     topSellingProducts: 'Top Selling Products', profitLoss: 'Profit & Loss',
+    // Returns/Refunds
+    returnsRefunds: 'Returns & Refunds', processReturn: 'Process Return',
+    returnProcessed: 'Return processed successfully', returnDeleted: 'Return deleted',
+    totalRefunds: 'Total Refunds', refundAmount: 'Refund Amount',
+    reason: 'Reason', noReturns: 'No returns recorded yet',
+    refundPerPiece: 'Refund per Piece', returnReasonPlaceholder: 'e.g. Damaged, wrong size, defective...',
+    totalRefund: 'Total Refund',
+    // Notifications
+    notifications: 'Notifications', markAllRead: 'Mark all read',
+    noNotifications: 'No notifications', lowStockAlert: 'Low Stock Alert',
+    more: 'more',
+    // Product Images
+    uploadImage: 'Upload Image', invalidImage: 'Please select an image file',
+    imageTooLarge: 'Image must be under 5MB', imageUploaded: 'Image uploaded',
+    uploadFailed: 'Upload failed', productImage: 'Product Image',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ', products: 'પ્રોડક્ટ્સ', orders: 'ઓર્ડર્સ', suppliers: 'સપ્લાયર્સ',
@@ -182,7 +197,6 @@ const translations = {
     added: 'ઉમેર્યું', sold: 'વેચ્યું', adjusted: 'એડજસ્ટ',
     stockAdjusted: 'સ્ટોક સફળતાપૂર્વક એડજસ્ટ થયો', noLogs: 'હજી કોઈ ઇન્વેન્ટરી લૉગ નથી',
     newStockValue: 'નવી સ્ટોક વેલ્યુ', optionalNotes: 'વૈકલ્પિક નોંધ...',
-    // Reports
     from: 'થી', to: 'સુધી', exportAll: 'બધું નિકાસ કરો', export: 'નિકાસ',
     totalRevenue: 'કુલ આવક', totalSold: 'કુલ વેચાણ', totalProfit: 'કુલ નફો',
     salesReport: 'વેચાણ રિપોર્ટ', productReport: 'પ્રોડક્ટ રિપોર્ટ',
@@ -194,7 +208,6 @@ const translations = {
     totalReceived: 'કુલ મળેલ', totalPending: 'કુલ બાકી',
     revenue: 'આવક', quantitySold: 'વેચાયેલ જથ્થો', dailySalesRate: 'દૈનિક દર',
     daysOfStock: 'સ્ટોકના દિવસો', suggestedOrder: 'સૂચિત ઓર્ડર', day: 'દિવસ', days: 'દિવસો',
-    // Settings
     shopInfo: 'દુકાનની માહિતી', shopName: 'દુકાનનું નામ', appearance: 'દેખાવ',
     darkModeDesc: 'લાઇટ અને ડાર્ક થીમ વચ્ચે સ્વિચ કરો', languageDesc: 'તમારી પસંદીદા ભાષા પસંદ કરો',
     security: 'સુરક્ષા', newPassword: 'નવો પાસવર્ડ', confirmPassword: 'પાસવર્ડ ખાતરી કરો',
@@ -202,7 +215,6 @@ const translations = {
     passwordsDoNotMatch: 'પાસવર્ડ મેળ ખાતા નથી', passwordTooShort: 'પાસવર્ડ ઓછામાં ઓછા ૬ અક્ષરનો હોવો જોઈએ',
     dangerZone: 'ડેન્જર ઝોન', logoutDesc: 'આ ઉપકરણ પરથી તમારા એકાઉન્ટમાંથી સાઇન આઉટ કરો.',
     generateBarcode: 'બારકોડ જનરેટ કરો', barcodeGenerated: 'બારકોડ જનરેટ થયો',
-    // Bill Upload
     billUpload: 'બિલ અપલોડ', uploadBillImage: 'કૃપા કરી બિલની છબી અપલોડ કરો',
     uploadingBill: 'બિલ અપલોડ થઈ રહ્યું છે...', extractingDetails: 'AI વિગતો કાઢી રહ્યું છે...',
     dropOrClickBill: 'સપ્લાયર બિલની છબી અહીં ક્લિક કરો અથવા મૂકો',
@@ -213,37 +225,45 @@ const translations = {
     billNo: 'બિલ નંબર', existingSupplier: 'હાલનો સપ્લાયર', newSupplier: 'નવો સપ્લાયર',
     items: 'આઇટમ્સ', confirmAndAddStock: 'પુષ્ટિ કરો અને સ્ટોકમાં ઉમેરો',
     billSaved: 'બિલ પ્રોસેસ થયું — પ્રોડક્ટ્સ અને સ્ટોક અપડેટ થયા!', saveFailed: 'સેવ નિષ્ફળ',
-    // Invoice
     invoice: 'ઇન્વોઇસ', printInvoice: 'ઇન્વોઇસ પ્રિન્ટ કરો', thankYou: 'તમારી ખરીદી માટે આભાર!',
     customerName: 'ગ્રાહકનું નામ', customerPhone: 'ગ્રાહકનો ફોન',
-    // Forgot/Reset Password
     forgotPassword: 'પાસવર્ડ ભૂલી ગયા?', forgotPasswordDesc: 'પાસવર્ડ રીસેટ લિંક મેળવવા માટે તમારો ઇમેઇલ દાખલ કરો.',
     sendResetLink: 'રીસેટ લિંક મોકલો', sendingResetLink: 'મોકલી રહ્યા છીએ...',
     resetEmailSent: 'પાસવર્ડ રીસેટ લિંક મોકલવામાં આવી! તમારો ઇમેઇલ ચેક કરો.',
     checkEmailConfirm: 'તમારો એકાઉન્ટ કન્ફર્મ કરવા ઇમેઇલ ચેક કરો.',
     resetPassword: 'પાસવર્ડ રીસેટ કરો', enterNewPassword: 'નીચે તમારો નવો પાસવર્ડ દાખલ કરો.',
     backToLogin: 'લોગિન પર પાછા જાઓ', invalidResetLink: 'આ રીસેટ લિંક અમાન્ય અથવા સમયસીમા વીતી ગઈ છે.',
-    // Customers
     customers: 'ગ્રાહકો', addCustomer: 'ગ્રાહક ઉમેરો', editCustomer: 'ગ્રાહક સંપાદિત કરો',
     searchCustomers: 'ગ્રાહકો શોધો...', noCustomers: 'કોઈ ગ્રાહક મળ્યા નથી',
     customerAdded: 'ગ્રાહક સફળતાપૂર્વક ઉમેરાયા', customerUpdated: 'ગ્રાહક સફળતાપૂર્વક અપડેટ થયા',
     customerDeleted: 'ગ્રાહક સફળતાપૂર્વક ડિલીટ થયા',
-    // Expenses
     expenses: 'ખર્ચ', addExpense: 'ખર્ચ ઉમેરો', totalExpenses: 'કુલ ખર્ચ',
     expenseAdded: 'ખર્ચ ઉમેરાયો', expenseDeleted: 'ખર્ચ ડિલીટ થયો',
     noExpenses: 'કોઈ ખર્ચ મળ્યો નથી', invalidAmount: 'કૃપા કરી માન્ય રકમ દાખલ કરો',
     description: 'વર્ણન',
-    // Expense categories
     rent: 'ભાડું', salary: 'પગાર', utilities: 'ઉપયોગિતાઓ', transport: 'પરિવહન',
     packaging: 'પેકેજિંગ', marketing: 'માર્કેટિંગ', maintenance: 'જાળવણી', other: 'અન્ય',
-    // Enhanced Sales
     discount: 'ડિસ્કાઉન્ટ', paymentMode: 'ચુકવણી પદ્ધતિ', cash: 'રોકડ', upi: 'UPI', card: 'કાર્ડ',
     customer: 'ગ્રાહક', selectCustomer: 'ગ્રાહક પસંદ કરો (વૈકલ્પિક)',
     subtotal: 'પેટા કુલ', total: 'કુલ',
-    // Dashboard
     totalStockValue: 'સ્ટોક મૂલ્ય', monthlyRevenue: 'માસિક આવક',
     monthlyExpenses: 'માસિક ખર્ચ', netProfit: 'ચોખ્ખો નફો',
     topSellingProducts: 'સૌથી વધુ વેચાતા પ્રોડક્ટ્સ', profitLoss: 'નફો અને નુકસાન',
+    // Returns/Refunds
+    returnsRefunds: 'રિટર્ન અને રિફંડ', processReturn: 'રિટર્ન પ્રોસેસ કરો',
+    returnProcessed: 'રિટર્ન સફળતાપૂર્વક પ્રોસેસ થયું', returnDeleted: 'રિટર્ન ડિલીટ થયું',
+    totalRefunds: 'કુલ રિફંડ', refundAmount: 'રિફંડ રકમ',
+    reason: 'કારણ', noReturns: 'હજી કોઈ રિટર્ન નોંધાયું નથી',
+    refundPerPiece: 'પ્રતિ પીસ રિફંડ', returnReasonPlaceholder: 'દા.ત. તૂટેલું, ખોટી સાઇઝ, ખામીયુક્ત...',
+    totalRefund: 'કુલ રિફંડ',
+    // Notifications
+    notifications: 'સૂચનાઓ', markAllRead: 'બધું વાંચ્યું',
+    noNotifications: 'કોઈ સૂચના નથી', lowStockAlert: 'ઓછા સ્ટોકની ચેતવણી',
+    more: 'વધુ',
+    // Product Images
+    uploadImage: 'છબી અપલોડ', invalidImage: 'કૃપા કરી છબી ફાઇલ પસંદ કરો',
+    imageTooLarge: 'છબી 5MB કરતાં ઓછી હોવી જોઈએ', imageUploaded: 'છબી અપલોડ થઈ',
+    uploadFailed: 'અપલોડ નિષ્ફળ', productImage: 'પ્રોડક્ટ છબી',
   },
 } as const;
 

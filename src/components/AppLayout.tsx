@@ -6,6 +6,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun, Globe, LogOut } from 'lucide-react';
+import { NotificationBell } from '@/components/NotificationBell';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const { language, setLanguage, t } = useLanguage();
@@ -32,6 +33,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <Button variant="ghost" size="icon" onClick={toggleTheme}>
                 {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </Button>
+              <NotificationBell />
               <Button variant="ghost" size="icon" onClick={signOut}>
                 <LogOut className="h-4 w-4" />
               </Button>

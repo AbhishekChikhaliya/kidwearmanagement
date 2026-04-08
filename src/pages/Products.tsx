@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Plus, Pencil, Trash2, Search } from 'lucide-react';
 import { toast } from 'sonner';
+import { ProductImageUpload } from '@/components/ProductImageUpload';
 
 interface Product {
   id: string;
@@ -25,6 +26,7 @@ interface Product {
   retail_price: number;
   stock_quantity: number;
   min_stock_level: number;
+  image_url: string | null;
   categories?: { name: string; name_gu: string | null } | null;
   suppliers?: { name: string } | null;
 }
@@ -35,6 +37,7 @@ interface Supplier { id: string; name: string; }
 const emptyForm = {
   name: '', category_id: '', supplier_id: '', size: '', color: '', brand: '',
   barcode: '', wholesale_price: 0, retail_price: 0, stock_quantity: 0, min_stock_level: 5,
+  image_url: '' as string | null,
 };
 
 export default function Products() {
@@ -70,6 +73,7 @@ export default function Products() {
       size: p.size || '', color: p.color || '', brand: p.brand || '', barcode: p.barcode || '',
       wholesale_price: p.wholesale_price, retail_price: p.retail_price,
       stock_quantity: p.stock_quantity, min_stock_level: p.min_stock_level,
+      image_url: p.image_url || null,
     });
     setDialogOpen(true);
   };
@@ -82,6 +86,7 @@ export default function Products() {
       supplier_id: form.supplier_id || null,
       size: form.size || null, color: form.color || null, brand: form.brand || null,
       barcode: form.barcode || null,
+      image_url: form.image_url || null,
       wholesale_price: Number(form.wholesale_price), retail_price: Number(form.retail_price),
       stock_quantity: Number(form.stock_quantity), min_stock_level: Number(form.min_stock_level),
     };
@@ -143,8 +148,13 @@ export default function Products() {
               {filtered.map(p => (
                 <TableRow key={p.id}>
                   <TableCell className="font-medium">
-                    {p.name}{p.size && <span className="text-muted-foreground text-xs ml-1">({p.size})</span>}
-                    {p.barcode && <p className="text-xs font-mono text-muted-foreground">{p.barcode}</p>}
+                    <div className="flex items-center gap-2">
+                      {p.image_url && <img src={p.image_url} alt={p.name} className="h-8 w-8 rounded object-cover" />}
+                      <div>
+                        {p.name}{p.size && <span className="text-muted-foreground text-xs ml-1">({p.size})</span>}
+                        {p.barcode && <p className="text-xs font-mono text-muted-foreground">{p.barcode}</p>}
+                      </div>
+                    </div>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">{language === 'gu' ? (p.categories?.name_gu || p.categories?.name) : p.categories?.name || '-'}</TableCell>
                   <TableCell className="hidden md:table-cell">{p.brand || '-'}</TableCell>
@@ -170,6 +180,10 @@ export default function Products() {
         <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader><DialogTitle>{editingId ? t('editProduct') : t('addProduct')}</DialogTitle></DialogHeader>
           <div className="grid gap-4 py-2">
+            <div>
+              <Label>{t('productImage')}</Label>
+              <ProductImageUpload imageUrl={form.image_url} onImageChange={(url) => setForm({...form, image_url: url})} />
+            </div>
             <div><Label>{t('name')} *</Label><Input value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
             <div className="grid grid-cols-2 gap-4">
               <div>

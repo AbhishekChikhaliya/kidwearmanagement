@@ -143,6 +143,18 @@ const translations = {
     uploadImage: 'Upload Image', invalidImage: 'Please select an image file',
     imageTooLarge: 'Image must be under 5MB', imageUploaded: 'Image uploaded',
     uploadFailed: 'Upload failed', productImage: 'Product Image',
+    // Sales Dashboard
+    salesDashboard: 'Sales Dashboard', totalOrders: 'Total Orders',
+    avgOrderValue: 'Avg Order Value', uniqueCustomers: 'Unique Customers',
+    revenueTrend: 'Revenue Trend', paymentBreakdown: 'Payment Breakdown',
+    weekdayPattern: 'Weekday Pattern', topCustomers: 'Top Customers',
+    ordersLabel: 'orders', walkInCustomer: 'Walk-in',
+    // Financial Dashboard
+    financialDashboard: 'Financial Dashboard', grossProfit: 'Gross Profit',
+    profitMargin: 'Profit Margin', plStatement: 'Profit & Loss Statement',
+    costOfGoods: 'Cost of Goods Sold', operatingExpenses: 'Operating Expenses',
+    monthlyPLTrend: 'Monthly P&L Trend', expenseBreakdown: 'Expense Breakdown',
+    marginTrend: 'Margin Trend',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ', products: 'પ્રોડક્ટ્સ', orders: 'ઓર્ડર્સ', suppliers: 'સપ્લાયર્સ',
@@ -264,6 +276,18 @@ const translations = {
     uploadImage: 'છબી અપલોડ', invalidImage: 'કૃપા કરી છબી ફાઇલ પસંદ કરો',
     imageTooLarge: 'છબી 5MB કરતાં ઓછી હોવી જોઈએ', imageUploaded: 'છબી અપલોડ થઈ',
     uploadFailed: 'અપલોડ નિષ્ફળ', productImage: 'પ્રોડક્ટ છબી',
+    // Sales Dashboard
+    salesDashboard: 'વેચાણ ડેશબોર્ડ', totalOrders: 'કુલ ઓર્ડર્સ',
+    avgOrderValue: 'સરેરાશ ઓર્ડર મૂલ્ય', uniqueCustomers: 'અનન્ય ગ્રાહકો',
+    revenueTrend: 'આવક ટ્રેન્ડ', paymentBreakdown: 'ચુકવણી વિશ્લેષણ',
+    weekdayPattern: 'અઠવાડિયાનો પેટર્ન', topCustomers: 'ટોચના ગ્રાહકો',
+    ordersLabel: 'ઓર્ડર્સ', walkInCustomer: 'વૉક-ઇન',
+    // Financial Dashboard
+    financialDashboard: 'નાણાકીય ડેશબોર્ડ', grossProfit: 'કુલ નફો',
+    profitMargin: 'નફા માર્જિન', plStatement: 'નફો અને નુકસાન સ્ટેટમેન્ટ',
+    costOfGoods: 'માલની કિંમત', operatingExpenses: 'સંચાલન ખર્ચ',
+    monthlyPLTrend: 'માસિક P&L ટ્રેન્ડ', expenseBreakdown: 'ખર્ચ વિશ્લેષણ',
+    marginTrend: 'માર્જિન ટ્રેન્ડ',
   },
 } as const;
 

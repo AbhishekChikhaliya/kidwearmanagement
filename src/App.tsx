@@ -23,6 +23,8 @@ import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import Returns from "./pages/Returns";
 import ResetPassword from "./pages/ResetPassword";
+import SalesDashboard from "./pages/SalesDashboard";
+import FinancialDashboard from "./pages/FinancialDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -51,6 +53,8 @@ const App = () => (
                 <Route path="/returns" element={<ProtectedRoute><AppLayout><Returns /></AppLayout></ProtectedRoute>} />
                 <Route path="/bill-upload" element={<ProtectedRoute><AppLayout><BillUpload /></AppLayout></ProtectedRoute>} />
                 <Route path="/reports" element={<ProtectedRoute><AppLayout><Reports /></AppLayout></ProtectedRoute>} />
+                <Route path="/sales-dashboard" element={<ProtectedRoute><AppLayout><SalesDashboard /></AppLayout></ProtectedRoute>} />
+                <Route path="/financial-dashboard" element={<ProtectedRoute><AppLayout><FinancialDashboard /></AppLayout></ProtectedRoute>} />
                 <Route path="/settings" element={<ProtectedRoute><AppLayout><Settings /></AppLayout></ProtectedRoute>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

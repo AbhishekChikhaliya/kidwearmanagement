@@ -1,6 +1,7 @@
 import {
   LayoutDashboard, Package, ShoppingCart, Users, TrendingUp,
   FileText, Settings, Tags, Warehouse, Receipt, UserCircle, Wallet, RotateCcw,
+  BarChart3, PieChart,
 } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useLocation } from 'react-router-dom';
@@ -29,6 +30,8 @@ export function AppSidebar() {
     { title: t('expenses'), url: '/expenses', icon: Wallet },
     { title: t('returnsRefunds'), url: '/returns', icon: RotateCcw },
     { title: t('billUpload'), url: '/bill-upload', icon: Receipt },
+    { title: t('salesDashboard'), url: '/sales-dashboard', icon: BarChart3 },
+    { title: t('financialDashboard'), url: '/financial-dashboard', icon: PieChart },
     { title: t('reports'), url: '/reports', icon: FileText },
     { title: t('settings'), url: '/settings', icon: Settings },
   ];

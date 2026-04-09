@@ -293,6 +293,11 @@ const translations = {
     costOfGoods: 'માલની કિંમત', operatingExpenses: 'સંચાલન ખર્ચ',
     monthlyPLTrend: 'માસિક P&L ટ્રેન્ડ', expenseBreakdown: 'ખર્ચ વિશ્લેષણ',
     marginTrend: 'માર્જિન ટ્રેન્ડ',
+    // Shop Settings
+    edit: 'સંપાદિત', save: 'સેવ', shopSettingsSaved: 'દુકાન સેટિંગ્સ સેવ થઈ!',
+    shopEmail: 'દુકાન ઇમેઇલ', shopTagline: 'ટેગલાઇન',
+    shopAddressPlaceholder: 'દુકાનનું સરનામું...', shopTaglinePlaceholder: 'દા.ત. શહેરમાં સૌથી સારા બાળકોના કપડાં',
+    accountEmail: 'એકાઉન્ટ ઇમેઇલ',
   },
 } as const;
 

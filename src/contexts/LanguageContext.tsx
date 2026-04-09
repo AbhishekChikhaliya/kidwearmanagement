@@ -155,6 +155,11 @@ const translations = {
     costOfGoods: 'Cost of Goods Sold', operatingExpenses: 'Operating Expenses',
     monthlyPLTrend: 'Monthly P&L Trend', expenseBreakdown: 'Expense Breakdown',
     marginTrend: 'Margin Trend',
+    // Shop Settings
+    edit: 'Edit', save: 'Save', shopSettingsSaved: 'Shop settings saved!',
+    shopEmail: 'Shop Email', shopTagline: 'Tagline',
+    shopAddressPlaceholder: 'Shop address...', shopTaglinePlaceholder: 'e.g. Best kids clothing in town',
+    accountEmail: 'Account Email',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ', products: 'પ્રોડક્ટ્સ', orders: 'ઓર્ડર્સ', suppliers: 'સપ્લાયર્સ',

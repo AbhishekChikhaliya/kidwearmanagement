@@ -155,6 +155,11 @@ const translations = {
     costOfGoods: 'Cost of Goods Sold', operatingExpenses: 'Operating Expenses',
     monthlyPLTrend: 'Monthly P&L Trend', expenseBreakdown: 'Expense Breakdown',
     marginTrend: 'Margin Trend',
+    // Shop Settings
+    edit: 'Edit', save: 'Save', shopSettingsSaved: 'Shop settings saved!',
+    shopEmail: 'Shop Email', shopTagline: 'Tagline',
+    shopAddressPlaceholder: 'Shop address...', shopTaglinePlaceholder: 'e.g. Best kids clothing in town',
+    accountEmail: 'Account Email',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ', products: 'પ્રોડક્ટ્સ', orders: 'ઓર્ડર્સ', suppliers: 'સપ્લાયર્સ',
@@ -288,6 +293,11 @@ const translations = {
     costOfGoods: 'માલની કિંમત', operatingExpenses: 'સંચાલન ખર્ચ',
     monthlyPLTrend: 'માસિક P&L ટ્રેન્ડ', expenseBreakdown: 'ખર્ચ વિશ્લેષણ',
     marginTrend: 'માર્જિન ટ્રેન્ડ',
+    // Shop Settings
+    edit: 'સંપાદિત', save: 'સેવ', shopSettingsSaved: 'દુકાન સેટિંગ્સ સેવ થઈ!',
+    shopEmail: 'દુકાન ઇમેઇલ', shopTagline: 'ટેગલાઇન',
+    shopAddressPlaceholder: 'દુકાનનું સરનામું...', shopTaglinePlaceholder: 'દા.ત. શહેરમાં સૌથી સારા બાળકોના કપડાં',
+    accountEmail: 'એકાઉન્ટ ઇમેઇલ',
   },
 } as const;
 

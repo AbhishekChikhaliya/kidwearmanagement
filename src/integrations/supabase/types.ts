@@ -380,6 +380,42 @@ export type Database = {
           },
         ]
       }
+      shop_settings: {
+        Row: {
+          created_at: string
+          gst_number: string | null
+          id: string
+          shop_address: string | null
+          shop_email: string | null
+          shop_name: string
+          shop_phone: string | null
+          shop_tagline: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          gst_number?: string | null
+          id?: string
+          shop_address?: string | null
+          shop_email?: string | null
+          shop_name?: string
+          shop_phone?: string | null
+          shop_tagline?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          gst_number?: string | null
+          id?: string
+          shop_address?: string | null
+          shop_email?: string | null
+          shop_name?: string
+          shop_phone?: string | null
+          shop_tagline?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       suppliers: {
         Row: {
           address: string | null

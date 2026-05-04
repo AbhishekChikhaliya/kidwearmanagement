@@ -62,17 +62,58 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-primary">
-            <Package className="h-6 w-6 text-primary-foreground" />
+    <div className="relative min-h-screen flex bg-background overflow-hidden">
+      {/* Animated gradient orbs */}
+      <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-primary/20 blur-3xl animate-float" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-accent/30 blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+
+      {/* Left: Hero image panel (hidden on mobile) */}
+      <div className="hidden lg:flex w-1/2 relative">
+        <img
+          src={loginHero}
+          alt="Children's clothing boutique"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/40 to-transparent" />
+        <div className="relative z-10 flex flex-col justify-end p-12 text-primary-foreground animate-fade-in">
+          <Sparkles className="h-10 w-10 mb-4 animate-float" />
+          <h2 className="text-4xl font-bold mb-3">{t('appName')}</h2>
+          <p className="text-lg opacity-90 mb-8 max-w-md">{t('appTagline')}</p>
+          <div className="space-y-3 max-w-md">
+            <div className="flex items-center gap-3 animate-slide-in-right" style={{ animationDelay: '0.1s' }}>
+              <div className="h-10 w-10 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center">
+                <ShoppingBag className="h-5 w-5" />
+              </div>
+              <span className="text-sm">Smart inventory & POS</span>
+            </div>
+            <div className="flex items-center gap-3 animate-slide-in-right" style={{ animationDelay: '0.2s' }}>
+              <div className="h-10 w-10 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center">
+                <TrendingUp className="h-5 w-5" />
+              </div>
+              <span className="text-sm">Real-time sales analytics</span>
+            </div>
+            <div className="flex items-center gap-3 animate-slide-in-right" style={{ animationDelay: '0.3s' }}>
+              <div className="h-10 w-10 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center">
+                <Sparkles className="h-5 w-5" />
+              </div>
+              <span className="text-sm">AI-powered bill scanning</span>
+            </div>
           </div>
-          <CardTitle className="text-2xl">{t('appName')}</CardTitle>
-          <CardDescription>
-            {isForgotPassword ? t('forgotPasswordDesc') : t('appTagline')}
-          </CardDescription>
-        </CardHeader>
+        </div>
+      </div>
+
+      {/* Right: Auth form */}
+      <div className="relative z-10 flex flex-1 items-center justify-center p-4">
+        <Card className="w-full max-w-md backdrop-blur-sm bg-card/95 border-border/50 shadow-2xl animate-scale-in">
+          <CardHeader className="text-center">
+            <div className="mx-auto mb-2 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 shadow-lg animate-float">
+              <Package className="h-7 w-7 text-primary-foreground" />
+            </div>
+            <CardTitle className="text-2xl">{t('appName')}</CardTitle>
+            <CardDescription>
+              {isForgotPassword ? t('forgotPasswordDesc') : t('appTagline')}
+            </CardDescription>
+          </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input

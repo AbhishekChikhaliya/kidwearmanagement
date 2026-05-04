@@ -38,7 +38,7 @@ export default function Settings() {
   }, []);
 
   const fetchShopSettings = async () => {
-    const { data } = await supabase.from('shop_settings').select('*').limit(1).single();
+    const { data } = await supabase.from('shop_settings').select('*').limit(1).maybeSingle();
     if (data) {
       setShopSettings({
         id: data.id,
@@ -49,6 +49,24 @@ export default function Settings() {
         gst_number: data.gst_number || '',
         shop_tagline: data.shop_tagline || '',
       });
+    } else {
+      // No settings row yet for this user — create a default one
+      const { data: created } = await supabase
+        .from('shop_settings')
+        .insert({ shop_name: 'KidWear Retail' })
+        .select()
+        .single();
+      if (created) {
+        setShopSettings({
+          id: created.id,
+          shop_name: created.shop_name || '',
+          shop_phone: created.shop_phone || '',
+          shop_address: created.shop_address || '',
+          shop_email: created.shop_email || '',
+          gst_number: created.gst_number || '',
+          shop_tagline: created.shop_tagline || '',
+        });
+      }
     }
   };
 

@@ -185,6 +185,7 @@ export default function Login() {
           </p>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

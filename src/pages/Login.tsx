@@ -6,8 +6,9 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Package, Loader2, Eye, EyeOff } from 'lucide-react';
+import { Package, Loader2, Eye, EyeOff, Sparkles, ShoppingBag, TrendingUp } from 'lucide-react';
 import { toast } from 'sonner';
+import loginHero from '@/assets/login-hero.jpg';
 
 export default function Login() {
   const { user, signIn, signUp } = useAuth();

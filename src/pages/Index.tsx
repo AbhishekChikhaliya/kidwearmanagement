@@ -125,8 +125,16 @@ export default function Dashboard() {
   const statusLabel = (s: string) => t(s as 'ordered' | 'received' | 'pending');
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">{t('dashboard')}</h1>
+    <div className="space-y-6 animate-fade-in">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/15 via-pink-500/10 to-purple-500/10 p-6 md:p-8 border card-glow">
+        <div className="absolute -right-8 -top-8 w-40 h-40 bg-primary/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute -left-8 -bottom-8 w-40 h-40 bg-pink-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        <div className="relative">
+          <h1 className="text-3xl md:text-4xl font-bold gradient-text">{t('dashboard')} ✨</h1>
+          <p className="text-muted-foreground mt-2">Welcome back! Here's your shop at a glance.</p>
+        </div>
+      </div>
+
 
       {/* Key Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -253,7 +261,7 @@ export default function Dashboard() {
 
 function SummaryCard({ icon, label, value, alert }: { icon: React.ReactNode; label: string; value: number | string; alert?: boolean }) {
   return (
-    <Card className={alert ? 'border-destructive' : ''}>
+    <Card className={`hover-lift card-glow ${alert ? 'border-destructive' : ''}`}>
       <CardContent className="p-4">
         <div className="flex items-center gap-3">
           <div className={`p-2 rounded-lg ${alert ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary'}`}>

@@ -261,7 +261,7 @@ export default function Dashboard() {
 
 function SummaryCard({ icon, label, value, alert }: { icon: React.ReactNode; label: string; value: number | string; alert?: boolean }) {
   return (
-    <Card className={alert ? 'border-destructive' : ''}>
+    <Card className={`hover-lift card-glow ${alert ? 'border-destructive' : ''}`}>
       <CardContent className="p-4">
         <div className="flex items-center gap-3">
           <div className={`p-2 rounded-lg ${alert ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary'}`}>

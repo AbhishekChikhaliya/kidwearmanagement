@@ -188,17 +188,39 @@ export default function Products() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label>{t('category')}</Label>
-                <Select value={form.category_id} onValueChange={v => setForm({...form, category_id: v})}>
-                  <SelectTrigger><SelectValue placeholder="-" /></SelectTrigger>
-                  <SelectContent>{categories.map(c => <SelectItem key={c.id} value={c.id}>{language === 'gu' ? (c.name_gu || c.name) : c.name}</SelectItem>)}</SelectContent>
-                </Select>
+                <div className="flex gap-1">
+                  <Select value={form.category_id} onValueChange={v => setForm({...form, category_id: v})}>
+                    <SelectTrigger className="flex-1"><SelectValue placeholder="-" /></SelectTrigger>
+                    <SelectContent>{categories.map(c => <SelectItem key={c.id} value={c.id}>{language === 'gu' ? (c.name_gu || c.name) : c.name}</SelectItem>)}</SelectContent>
+                  </Select>
+                  <Button type="button" variant="outline" size="icon" onClick={async () => {
+                    const name = window.prompt(t('category') + ' - ' + t('name'));
+                    if (!name?.trim()) return;
+                    const { data, error } = await supabase.from('categories').insert({ name: name.trim() }).select().single();
+                    if (error) { toast.error(error.message); return; }
+                    setCategories(prev => [...prev, data]);
+                    setForm(f => ({ ...f, category_id: data.id }));
+                    toast.success(t('add'));
+                  }}><Plus className="h-4 w-4" /></Button>
+                </div>
               </div>
               <div>
                 <Label>{t('supplier')}</Label>
-                <Select value={form.supplier_id} onValueChange={v => setForm({...form, supplier_id: v})}>
-                  <SelectTrigger><SelectValue placeholder="-" /></SelectTrigger>
-                  <SelectContent>{suppliers.map(s => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}</SelectContent>
-                </Select>
+                <div className="flex gap-1">
+                  <Select value={form.supplier_id} onValueChange={v => setForm({...form, supplier_id: v})}>
+                    <SelectTrigger className="flex-1"><SelectValue placeholder="-" /></SelectTrigger>
+                    <SelectContent>{suppliers.map(s => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}</SelectContent>
+                  </Select>
+                  <Button type="button" variant="outline" size="icon" onClick={async () => {
+                    const name = window.prompt(t('supplier') + ' - ' + t('name'));
+                    if (!name?.trim()) return;
+                    const { data, error } = await supabase.from('suppliers').insert({ name: name.trim() }).select().single();
+                    if (error) { toast.error(error.message); return; }
+                    setSuppliers(prev => [...prev, data]);
+                    setForm(f => ({ ...f, supplier_id: data.id }));
+                    toast.success(t('add'));
+                  }}><Plus className="h-4 w-4" /></Button>
+                </div>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-4">

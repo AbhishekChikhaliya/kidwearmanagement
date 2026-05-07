@@ -93,3 +93,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-pink-500 to-primary bg-clip-text text-transparent;
+  }
+  .card-glow {
+    @apply transition-shadow duration-300 hover:shadow-[0_8px_30px_-8px_hsl(var(--primary)/0.35)];
+  }
+}
+

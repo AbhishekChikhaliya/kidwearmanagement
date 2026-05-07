@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PageHeader } from '@/components/PageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -120,10 +121,7 @@ export default function FinancialDashboard() {
   const profitChange = pctChange(monthlyComparison.current.profit, monthlyComparison.previous.profit);
 
   return (
-    <div className="space-y-4">
-      <h1 className="text-2xl font-bold text-foreground">{t('financialDashboard')}</h1>
-
-      {/* KPI Cards */}
+    <PageHeader title={t('financialDashboard')} subtitle="Profit, expenses & cashflow at a glance" emoji="💰" icon={<TrendingUp className="h-6 w-6" />} actions={<>{/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <FinCard icon={<IndianRupee className="h-5 w-5" />} label={t('monthlyRevenue')} value={`₹${summary.revenue.toLocaleString()}`} change={revChange} />
         <FinCard icon={<TrendingUp className="h-5 w-5" />} label={t('grossProfit')} value={`₹${summary.grossProfit.toLocaleString()}`} />
@@ -206,8 +204,7 @@ export default function FinancialDashboard() {
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
-      </Card>
-    </div>
+      </Card></>} />
   );
 }
 

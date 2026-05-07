@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PageHeader } from '@/components/PageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -10,7 +11,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, PieChart, Pie, Cell, AreaChart, Area,
 } from 'recharts';
-import { TrendingUp, ShoppingCart, IndianRupee, Users, CreditCard } from 'lucide-react';
+import { TrendingUp, ShoppingCart, IndianRupee, Users, CreditCard, BarChart3 } from 'lucide-react';
 
 const COLORS = ['hsl(221, 83%, 53%)', 'hsl(142, 71%, 45%)', 'hsl(38, 92%, 50%)', 'hsl(330, 81%, 60%)', 'hsl(262, 83%, 58%)'];
 
@@ -116,10 +117,8 @@ export default function SalesDashboard() {
   if (loading) return <div className="flex items-center justify-center h-64"><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" /></div>;
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold text-foreground">{t('salesDashboard')}</h1>
-        <div className="flex items-center gap-2 flex-wrap">
+    <div className="space-y-6 animate-fade-in">
+      <PageHeader title={t('salesDashboard')} subtitle="Sales trends and top performers" emoji="📈" icon={<BarChart3 className="h-6 w-6" />} actions={<><div className="flex items-center gap-2 flex-wrap">
           <div className="flex items-center gap-2">
             <Label className="text-sm">{t('from')}:</Label>
             <Input type="date" value={dateRange.from} onChange={e => setDateRange(p => ({ ...p, from: e.target.value }))} className="w-auto" />
@@ -128,8 +127,7 @@ export default function SalesDashboard() {
             <Label className="text-sm">{t('to')}:</Label>
             <Input type="date" value={dateRange.to} onChange={e => setDateRange(p => ({ ...p, to: e.target.value }))} className="w-auto" />
           </div>
-        </div>
-      </div>
+        </div></>} />
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

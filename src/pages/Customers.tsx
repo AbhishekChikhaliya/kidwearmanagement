@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PageHeader } from '@/components/PageHeader';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Plus, Pencil, Trash2, Search, User, Phone, Mail } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, User, Phone, Mail, Users } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Customer {
@@ -86,11 +87,8 @@ export default function Customers() {
   if (loading) return <div className="flex items-center justify-center h-64"><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" /></div>;
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-foreground">{t('customers')}</h1>
-        <Button onClick={openCreate}><Plus className="h-4 w-4 mr-1" />{t('addCustomer')}</Button>
-      </div>
+    <div className="space-y-6 animate-fade-in">
+      <PageHeader title={t('customers')} subtitle="Build relationships, track loyalty" emoji="👨‍👩‍👧" icon={<Users className="h-6 w-6" />} actions={<><Button onClick={openCreate}><Plus className="h-4 w-4 mr-1" />{t('addCustomer')}</Button></>} />
 
       <div className="relative max-w-sm">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />

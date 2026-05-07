@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PageHeader } from '@/components/PageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -13,7 +14,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, PieChart, Pie, Cell,
 } from 'recharts';
-import { Download, TrendingUp, Package, AlertTriangle, ShoppingCart } from 'lucide-react';
+import { Download, TrendingUp, Package, AlertTriangle, ShoppingCart, FileBarChart } from 'lucide-react';
 import * as XLSX from 'xlsx';
 
 const COLORS = ['hsl(221, 83%, 53%)', 'hsl(330, 81%, 60%)', 'hsl(142, 71%, 45%)', 'hsl(38, 92%, 50%)', 'hsl(262, 83%, 58%)', 'hsl(0, 84%, 60%)'];
@@ -187,10 +188,8 @@ export default function Reports() {
   if (loading) return <div className="flex items-center justify-center h-64"><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" /></div>;
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold text-foreground">{t('reports')}</h1>
-        <div className="flex items-center gap-2 flex-wrap">
+    <div className="space-y-6 animate-fade-in">
+      <PageHeader title={t('reports')} subtitle="Insights & exportable analytics" emoji="📊" icon={<FileBarChart className="h-6 w-6" />} actions={<><div className="flex items-center gap-2 flex-wrap">
           <div className="flex items-center gap-2">
             <Label className="text-sm">{t('from')}:</Label>
             <Input type="date" value={dateRange.from} onChange={e => setDateRange({ ...dateRange, from: e.target.value })} className="w-auto" />
@@ -202,8 +201,7 @@ export default function Reports() {
           <Button onClick={() => exportToExcel('all')} variant="outline">
             <Download className="h-4 w-4 mr-1" />{t('exportAll')}
           </Button>
-        </div>
-      </div>
+        </div></>} />
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PageHeader } from '@/components/PageHeader';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -11,7 +12,7 @@ import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { Moon, Sun, Lock, Store, Save, Pencil } from 'lucide-react';
+import { Moon, Sun, Lock, Store, Save, Pencil, Settings } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Settings() {
@@ -108,10 +109,7 @@ export default function Settings() {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl">
-      <h1 className="text-2xl font-bold text-foreground">{t('settings')}</h1>
-
-      {/* Shop Info */}
+    <PageHeader title={t('settings')} subtitle="Customize your shop preferences" emoji="⚙️" icon={<Settings className="h-6 w-6" />} actions={<>{/* Shop Info */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-base flex items-center gap-2"><Store className="h-4 w-4" />{t('shopInfo')}</CardTitle>
@@ -251,7 +249,6 @@ export default function Settings() {
           <p className="text-sm text-muted-foreground mb-3">{t('logoutDesc')}</p>
           <Button variant="destructive" onClick={signOut}>{t('logout')}</Button>
         </CardContent>
-      </Card>
-    </div>
+      </Card></>} />
   );
 }

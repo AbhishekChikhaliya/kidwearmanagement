@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PageHeader } from '@/components/PageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Plus, ArrowUpCircle, ArrowDownCircle, RefreshCw } from 'lucide-react';
+import { Plus, ArrowUpCircle, ArrowDownCircle, RefreshCw, Boxes } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface InventoryLog {
@@ -91,11 +92,8 @@ export default function Inventory() {
   if (loading) return <div className="flex items-center justify-center h-64"><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" /></div>;
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-foreground">{t('inventoryTracking')}</h1>
-        <Button onClick={() => setDialogOpen(true)}><Plus className="h-4 w-4 mr-1" />{t('adjustStock')}</Button>
-      </div>
+    <div className="space-y-6 animate-fade-in">
+      <PageHeader title={t('inventoryTracking')} subtitle="Live stock & adjustment history" emoji="📋" icon={<Boxes className="h-6 w-6" />} actions={<><Button onClick={() => setDialogOpen(true)}><Plus className="h-4 w-4 mr-1" />{t('adjustStock')}</Button></>} />
 
       <Tabs defaultValue="logs">
         <TabsList>

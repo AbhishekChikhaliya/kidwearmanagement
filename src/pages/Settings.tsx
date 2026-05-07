@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PageHeader } from '@/components/PageHeader';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -11,7 +12,7 @@ import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { Moon, Sun, Lock, Store, Save, Pencil } from 'lucide-react';
+import { Moon, Sun, Lock, Store, Save, Pencil, Settings as SettingsIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Settings() {
@@ -108,9 +109,8 @@ export default function Settings() {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl">
-      <h1 className="text-2xl font-bold text-foreground">{t('settings')}</h1>
-
+    <div className="space-y-6 max-w-2xl animate-fade-in">
+      <PageHeader title={t('settings')} subtitle="Customize your shop preferences" emoji="⚙️" icon={<SettingsIcon className="h-6 w-6" />} />
       {/* Shop Info */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">

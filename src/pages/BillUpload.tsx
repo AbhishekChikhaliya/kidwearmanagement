@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PageHeader } from '@/components/PageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Upload, FileImage, Check, Loader2, Edit, Trash2 } from 'lucide-react';
+import { Upload, FileImage, Check, Loader2, Edit, Trash2, FileScan } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface ExtractedItem {
@@ -248,10 +249,8 @@ export default function BillUpload() {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-foreground">{t('billUpload')}</h1>
-      </div>
+    <div className="space-y-6 animate-fade-in">
+      <PageHeader title={t('billUpload')} subtitle="Scan supplier bills with AI" emoji="🧾" icon={<FileScan className="h-6 w-6" />} />
 
       {/* Upload Area */}
       <Card>

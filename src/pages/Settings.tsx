@@ -251,6 +251,7 @@ export default function Settings() {
           <p className="text-sm text-muted-foreground mb-3">{t('logoutDesc')}</p>
           <Button variant="destructive" onClick={signOut}>{t('logout')}</Button>
         </CardContent>
-      </Card></>} />
+      </Card>
+    </div>
   );
 }

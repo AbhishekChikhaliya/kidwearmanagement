@@ -206,7 +206,8 @@ export default function FinancialDashboard() {
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
-      </Card></>} />
+      </Card>
+    </div>
   );
 }
 

@@ -121,7 +121,9 @@ export default function FinancialDashboard() {
   const profitChange = pctChange(monthlyComparison.current.profit, monthlyComparison.previous.profit);
 
   return (
-    <PageHeader title={t('financialDashboard')} subtitle="Profit, expenses & cashflow at a glance" emoji="💰" icon={<TrendingUp className="h-6 w-6" />} actions={<>{/* KPI Cards */}
+    <div className="space-y-6 animate-fade-in">
+      <PageHeader title={t('financialDashboard')} subtitle="Profit, expenses & cashflow at a glance" emoji="💰" icon={<TrendingUp className="h-6 w-6" />} />
+      {/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <FinCard icon={<IndianRupee className="h-5 w-5" />} label={t('monthlyRevenue')} value={`₹${summary.revenue.toLocaleString()}`} change={revChange} />
         <FinCard icon={<TrendingUp className="h-5 w-5" />} label={t('grossProfit')} value={`₹${summary.grossProfit.toLocaleString()}`} />

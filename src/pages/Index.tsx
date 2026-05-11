@@ -139,17 +139,17 @@ export default function Dashboard() {
 
       {/* Key Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <SummaryCard icon={<IndianRupee className="h-5 w-5" />} label={t('monthlyRevenue')} value={`₹${data.monthlyRevenue.toLocaleString()}`} />
-        <SummaryCard icon={<TrendingUp className="h-5 w-5" />} label={t('netProfit')} value={`₹${data.monthlyProfit.toLocaleString()}`} alert={data.monthlyProfit < 0} />
-        <SummaryCard icon={<Package className="h-5 w-5" />} label={t('totalStockValue')} value={`₹${data.totalStockValue.toLocaleString()}`} />
-        <SummaryCard icon={<Wallet className="h-5 w-5" />} label={t('monthlyExpenses')} value={`₹${data.monthlyExpenses.toLocaleString()}`} />
+        <SummaryCard icon={<IndianRupee className="h-5 w-5" />} label={t('monthlyRevenue')} value={data.monthlyRevenue} prefix="₹" />
+        <SummaryCard icon={<TrendingUp className="h-5 w-5" />} label={t('netProfit')} value={data.monthlyProfit} prefix="₹" alert={data.monthlyProfit < 0} />
+        <SummaryCard icon={<Package className="h-5 w-5" />} label={t('totalStockValue')} value={data.totalStockValue} prefix="₹" />
+        <SummaryCard icon={<Wallet className="h-5 w-5" />} label={t('monthlyExpenses')} value={data.monthlyExpenses} prefix="₹" />
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <SummaryCard icon={<Package className="h-5 w-5" />} label={t('totalProducts')} value={data.totalProducts} />
         <SummaryCard icon={<Tags className="h-5 w-5" />} label={t('totalCategories')} value={data.totalCategories} />
         <SummaryCard icon={<AlertTriangle className="h-5 w-5" />} label={t('lowStockItems')} value={data.lowStockItems.length} alert={data.lowStockItems.length > 0} />
-        <SummaryCard icon={<ShoppingCart className="h-5 w-5" />} label={t('todaysSales')} value={`${data.todaysSales} ${t('pieces')}`} />
+        <SummaryCard icon={<ShoppingCart className="h-5 w-5" />} label={t('todaysSales')} value={data.todaysSales} suffix={` ${t('pieces')}`} />
       </div>
 
       {/* Charts */}

@@ -303,18 +303,42 @@ export default function BillUpload() {
             <Card>
               <CardHeader><CardTitle>{t('extractedDetails')}</CardTitle></CardHeader>
               <CardContent className="space-y-4">
-                {/* Supplier Info */}
-                <div className="p-3 rounded-lg bg-muted space-y-1">
-                  <p className="font-semibold text-foreground">{extracted.supplier.name}</p>
-                  {extracted.supplier.gst_number && <p className="text-sm text-muted-foreground">GST: {extracted.supplier.gst_number}</p>}
-                  {extracted.supplier.phone && <p className="text-sm text-muted-foreground">{t('phone')}: {extracted.supplier.phone}</p>}
-                  {extracted.bill_number && <p className="text-sm text-muted-foreground">{t('billNo')}: {extracted.bill_number}</p>}
-                  {extracted.bill_date && <p className="text-sm text-muted-foreground">{t('date')}: {extracted.bill_date}</p>}
-                  {extracted.supplier.matched_id ? (
-                    <Badge variant="default">{t('existingSupplier')}</Badge>
-                  ) : (
-                    <Badge variant="secondary">{t('newSupplier')}</Badge>
-                  )}
+                {/* Supplier / Bill Info — editable */}
+                <div className="p-3 rounded-lg bg-muted space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('supplier')} & {t('billUpload')}</span>
+                    {extracted.supplier.matched_id ? (
+                      <Badge variant="default">{t('existingSupplier')}</Badge>
+                    ) : (
+                      <Badge variant="secondary">{t('newSupplier')}</Badge>
+                    )}
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="col-span-2">
+                      <Label className="text-xs">{t('supplier')} {t('name')}</Label>
+                      <Input value={extracted.supplier.name} onChange={e => setExtracted({ ...extracted, supplier: { ...extracted.supplier, name: e.target.value, matched_id: null } })} />
+                    </div>
+                    <div>
+                      <Label className="text-xs">GST</Label>
+                      <Input value={extracted.supplier.gst_number || ''} onChange={e => setExtracted({ ...extracted, supplier: { ...extracted.supplier, gst_number: e.target.value } })} />
+                    </div>
+                    <div>
+                      <Label className="text-xs">{t('phone')}</Label>
+                      <Input value={extracted.supplier.phone || ''} onChange={e => setExtracted({ ...extracted, supplier: { ...extracted.supplier, phone: e.target.value } })} />
+                    </div>
+                    <div>
+                      <Label className="text-xs">{t('billNo')}</Label>
+                      <Input value={extracted.bill_number || ''} onChange={e => setExtracted({ ...extracted, bill_number: e.target.value })} />
+                    </div>
+                    <div>
+                      <Label className="text-xs">{t('date')}</Label>
+                      <Input type="date" value={extracted.bill_date || ''} onChange={e => setExtracted({ ...extracted, bill_date: e.target.value })} />
+                    </div>
+                    <div className="col-span-2">
+                      <Label className="text-xs">{t('address')}</Label>
+                      <Input value={extracted.supplier.address || ''} onChange={e => setExtracted({ ...extracted, supplier: { ...extracted.supplier, address: e.target.value } })} />
+                    </div>
+                  </div>
                 </div>
 
                 {/* Items */}

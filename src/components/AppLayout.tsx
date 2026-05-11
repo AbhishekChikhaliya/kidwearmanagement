@@ -63,6 +63,8 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             </div>
           </main>
         </div>
+        <CommandPalette />
+        <QuickActionsFab />
       </div>
     </SidebarProvider>
   );

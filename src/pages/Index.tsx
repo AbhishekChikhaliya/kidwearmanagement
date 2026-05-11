@@ -260,7 +260,7 @@ export default function Dashboard() {
   );
 }
 
-function SummaryCard({ icon, label, value, alert }: { icon: React.ReactNode; label: string; value: number | string; alert?: boolean }) {
+function SummaryCard({ icon, label, value, alert, prefix, suffix }: { icon: React.ReactNode; label: string; value: number | string; alert?: boolean; prefix?: string; suffix?: string }) {
   return (
     <Card className={`hover-lift card-glow ${alert ? 'border-destructive' : ''}`}>
       <CardContent className="p-4">
@@ -270,7 +270,11 @@ function SummaryCard({ icon, label, value, alert }: { icon: React.ReactNode; lab
           </div>
           <div>
             <p className="text-xs text-muted-foreground">{label}</p>
-            <p className="text-xl font-bold text-foreground">{value}</p>
+            <p className="text-xl font-bold text-foreground">
+              {typeof value === 'number'
+                ? <AnimatedCounter value={value} prefix={prefix} suffix={suffix} />
+                : value}
+            </p>
           </div>
         </div>
       </CardContent>

@@ -7,6 +7,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun, Globe, LogOut } from 'lucide-react';
 import { NotificationBell } from '@/components/NotificationBell';
+import { CommandPalette } from '@/components/CommandPalette';
+import { QuickActionsFab } from '@/components/QuickActionsFab';
+import { Search } from 'lucide-react';
 import kidsBanner from '@/assets/kids-banner.jpg';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {

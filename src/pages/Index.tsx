@@ -4,6 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Package, Tags, AlertTriangle, TrendingUp, Wallet, IndianRupee, ShoppingCart } from 'lucide-react';
+import { AnimatedCounter } from '@/components/AnimatedCounter';
 import {
   PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis,
   CartesianGrid, Tooltip,
@@ -138,17 +139,17 @@ export default function Dashboard() {
 
       {/* Key Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <SummaryCard icon={<IndianRupee className="h-5 w-5" />} label={t('monthlyRevenue')} value={`₹${data.monthlyRevenue.toLocaleString()}`} />
-        <SummaryCard icon={<TrendingUp className="h-5 w-5" />} label={t('netProfit')} value={`₹${data.monthlyProfit.toLocaleString()}`} alert={data.monthlyProfit < 0} />
-        <SummaryCard icon={<Package className="h-5 w-5" />} label={t('totalStockValue')} value={`₹${data.totalStockValue.toLocaleString()}`} />
-        <SummaryCard icon={<Wallet className="h-5 w-5" />} label={t('monthlyExpenses')} value={`₹${data.monthlyExpenses.toLocaleString()}`} />
+        <SummaryCard icon={<IndianRupee className="h-5 w-5" />} label={t('monthlyRevenue')} value={data.monthlyRevenue} prefix="₹" />
+        <SummaryCard icon={<TrendingUp className="h-5 w-5" />} label={t('netProfit')} value={data.monthlyProfit} prefix="₹" alert={data.monthlyProfit < 0} />
+        <SummaryCard icon={<Package className="h-5 w-5" />} label={t('totalStockValue')} value={data.totalStockValue} prefix="₹" />
+        <SummaryCard icon={<Wallet className="h-5 w-5" />} label={t('monthlyExpenses')} value={data.monthlyExpenses} prefix="₹" />
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <SummaryCard icon={<Package className="h-5 w-5" />} label={t('totalProducts')} value={data.totalProducts} />
         <SummaryCard icon={<Tags className="h-5 w-5" />} label={t('totalCategories')} value={data.totalCategories} />
         <SummaryCard icon={<AlertTriangle className="h-5 w-5" />} label={t('lowStockItems')} value={data.lowStockItems.length} alert={data.lowStockItems.length > 0} />
-        <SummaryCard icon={<ShoppingCart className="h-5 w-5" />} label={t('todaysSales')} value={`${data.todaysSales} ${t('pieces')}`} />
+        <SummaryCard icon={<ShoppingCart className="h-5 w-5" />} label={t('todaysSales')} value={data.todaysSales} suffix={` ${t('pieces')}`} />
       </div>
 
       {/* Charts */}
@@ -259,7 +260,7 @@ export default function Dashboard() {
   );
 }
 
-function SummaryCard({ icon, label, value, alert }: { icon: React.ReactNode; label: string; value: number | string; alert?: boolean }) {
+function SummaryCard({ icon, label, value, alert, prefix, suffix }: { icon: React.ReactNode; label: string; value: number | string; alert?: boolean; prefix?: string; suffix?: string }) {
   return (
     <Card className={`hover-lift card-glow ${alert ? 'border-destructive' : ''}`}>
       <CardContent className="p-4">
@@ -269,7 +270,11 @@ function SummaryCard({ icon, label, value, alert }: { icon: React.ReactNode; lab
           </div>
           <div>
             <p className="text-xs text-muted-foreground">{label}</p>
-            <p className="text-xl font-bold text-foreground">{value}</p>
+            <p className="text-xl font-bold text-foreground">
+              {typeof value === 'number'
+                ? <AnimatedCounter value={value} prefix={prefix} suffix={suffix} />
+                : value}
+            </p>
           </div>
         </div>
       </CardContent>

@@ -4,6 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Package, Tags, AlertTriangle, TrendingUp, Wallet, IndianRupee, ShoppingCart } from 'lucide-react';
+import { AnimatedCounter } from '@/components/AnimatedCounter';
 import {
   PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis,
   CartesianGrid, Tooltip,
